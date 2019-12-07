@@ -1,0 +1,50 @@
+//создание платформ
+// function generate_land() {
+//
+//     let slider = $('.game-slider');
+//     let land = $('.land');
+//     let caterpi = $('.caterpi');
+//     let hyena = $(".hyena");
+//
+//     let baseLeft = 700;
+//     let baseBottom = 90;
+//     let baseFrame = 5880;
+//     let baseImg = 500;
+//     let baseWidth = 588;
+//     let stepFrame = Math.round(baseFrame / baseWidth);
+//     // console.dir(baseBottom+randomInteger(-100,100));
+//
+//     for (let i = 0; i < stepFrame; i++) {
+//         let bottom = baseBottom + randomInteger(baseBottom, baseBottom - 60);
+//         let distance = randomInteger(40, 50);
+//         let distanceHyena = randomInteger(500, 750);
+//
+//         //добавление платформ для гусениц в игре
+//         land.append($("<img class='land-frame' id='land" + i + "'>").attr("src", "image/land-vector.png").css({
+//             // left: baseLeft + baseImg * i,
+//             // bottom: bottom
+//             left: baseLeft + baseImg * i + distance + "px",
+//             bottom: bottom + "px"
+//         }));
+//
+//         //добавление гусениц в игре
+//         caterpi.append($("<img class='caterpi-frame' id='caterpi" + i + "'>").attr("src", "image/caterpillar.png").css({
+//             left: baseLeft + baseImg * i + distance + 28 + "px",
+//             bottom: bottom + 35 + "px",
+//             width: "30px"
+//         }));
+//
+//         //расчет расстояния клеток у гиен
+//         let wh = baseLeft + distanceHyena * i;
+//
+//         if (wh < 5500) {//ограничить появление клеток у гиен
+//             hyena.append(
+//                 $("<div class='hyena-room' id='room" + i + "'>").css({
+//                     left: baseLeft + distanceHyena * i + "px"
+//                 })
+//             );
+//
+//             $('.hyena-room#room' + i).append($("<img class='nps-hyena' id='nps-hyena" + i + "'>").attr('src', 'image/HyenaRun.gif').css({}));
+//         }
+//     }
+// }

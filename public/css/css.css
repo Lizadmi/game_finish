@@ -93,10 +93,11 @@ body {
     box-shadow: green 0 0 6px;
     background: #8dc788;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
-
 
 .character:hover {
     box-shadow: black 0 0 10px;
@@ -106,6 +107,16 @@ body {
 
 .character:hover > img {
     transform: scale(1.4, 1.4);
+}
+.name-char{
+    position: absolute;
+    top: 100%;
+    background: #ffcc3d;
+    border-radius: 5px;
+    box-shadow: 0 0 5px black;
+    width: 100px;
+    height: 20px;
+    text-align: center;
 }
 
 .enter-footer {

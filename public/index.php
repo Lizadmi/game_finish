@@ -21,9 +21,11 @@
             <div class="choice">
                 <div class="character" id="pumba" data-anime="fade">
                     <img src="image/pumba.png" alt="" width="150">
+                    <div class="name-char">Пумба</div>
                 </div>
                 <div class="character" id="timon" data-anime="fade">
                     <img src="image/timon.png" alt="" width="150">
+                    <div class="name-char">Тимон</div>
                 </div>
             </div>
         </div>

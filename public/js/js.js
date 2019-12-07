@@ -1,6 +1,5 @@
-////////////
 // startGame(); //- test
-
+//анимация запуска начального экрана
 const $anime_enter = () => {
     let $i = 0;
 
@@ -21,7 +20,7 @@ const $anime_enter = () => {
         $i++;
     }, time.enter);
 };
-
+//выбор персонажа
 $('.character').click(function () {
     char = $(this).attr('id');
     $('.start-game').css('display', 'block');
@@ -31,7 +30,6 @@ $('.character').click(function () {
     $('[id="' + char + '"]').hide();
     char = (char == "pumba") ? "timon" : "pumba";
 });
-
 
 /**
  * анимация главного входа игры
@@ -76,7 +74,7 @@ $('.close').click(() => {
         }
     });
 });
-
+// активация/деактивация кнопки старта
 $('.pl-name-animate').on('input', function () {
     //получаем текст никнейма пользователя
     var nick = $(this).val();
@@ -132,75 +130,6 @@ $('.btn-enter').click(function () {
     })
 });
 
-//начало игры
-
-
-//отрисовка сцены
-
-
-/////////Анимация гусениц
-// let checkCaterpiTransform = false;
-
-/////////
-
-
-//создание платформ
-function generate_land() {
-
-    let slider = $('.game-slider');
-    let land = $('.land');
-    let caterpi = $('.caterpi');
-    let hyena = $(".hyena");
-
-    let baseLeft = 700;
-    let baseBottom = 90;
-    let baseFrame = 5880;
-    let baseImg = 500;
-    let baseWidth = 588;
-    let stepFrame = Math.round(baseFrame / baseWidth);
-    // console.dir(baseBottom+randomInteger(-100,100));
-
-    for (let i = 0; i < stepFrame; i++) {
-        let bottom = baseBottom + randomInteger(baseBottom, baseBottom - 60);
-        let distance = randomInteger(40, 50);
-        let distanceHyena = randomInteger(500, 750);
-
-        //добавление платформ для гусениц в игре
-        land.append($("<img class='land-frame' id='land" + i + "'>").attr("src", "image/land-vector.png").css({
-            // left: baseLeft + baseImg * i,
-            // bottom: bottom
-            left: baseLeft + baseImg * i + distance + "px",
-            bottom: bottom + "px"
-        }));
-
-        //добавление гусениц в игре
-        caterpi.append($("<img class='caterpi-frame' id='caterpi" + i + "'>").attr("src", "image/caterpillar.png").css({
-            left: baseLeft + baseImg * i + distance + 28 + "px",
-            bottom: bottom + 35 + "px",
-            width: "30px"
-        }));
-
-        //расчет расстояния клеток у гиен
-        let wh = baseLeft + distanceHyena * i;
-
-        if (wh < 5500) {//ограничить появление клеток у гиен
-            hyena.append(
-                $("<div class='hyena-room' id='room" + i + "'>").css({
-                    left: baseLeft + distanceHyena * i + "px"
-                })
-            );
-
-            $('.hyena-room#room' + i).append($("<img class='nps-hyena' id='nps-hyena" + i + "'>").attr('src', 'image/HyenaRun.gif').css({}));
-        }
-    }
-
-
-}
-
-
-//движение гиены в клетке
-
-
 //конец игры
 function finishGame() {
     pause = true;
@@ -254,8 +183,7 @@ function finishGame() {
     })
 
 }
-
-
+//смерть перса
 function endGame() {
     pause = true;
     $('.game-field').animate({
@@ -299,3 +227,34 @@ function endGame() {
     })
 }
 
+// //сброс настроек
+// function varNull() {
+//     console.log(returnGame);
+//     if (!returnGame) return;
+//     returnGame = false;
+//
+//     for (let i = 0; i < timer_game.length; i++) {
+//         clearInterval(timer_game[i]);
+//     }
+//     $('.new-land').css({display: 'none'});
+//     $('.game-slider').css('left', '');
+//     $('.hyena').empty();
+//     $('.caterpi').empty();
+//     $('.land').empty();
+//     moveInFrame = 400;
+//     paddleX = (moveInFrame - playerWidth) / 2;
+//     distanceCharY = 550;
+//     change = false;
+//     changeID = null;
+//     countHp = 100;
+//     countCaterp = 0;
+//     countTimes = 0;
+//     distationToFinish = 0;
+//     timer_game = [];
+//     cordHyena = 1;
+//     moveHyena = true;
+//     PlayerAnimate = false;
+//     pause = false;
+//     generate_land();
+//     drawAnime()
+// }
