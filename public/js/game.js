@@ -43,13 +43,19 @@ var
     moveHyena = true,
     PlayerAnimate = false,
     checkCaterpiTransform = false,
-    returnGame = false;
+    returnGame = false,
+    checkNewGame = false;
+
 
 //начало игры
 function startGame() {
     $('.video-player').trigger('pause');//остановка видео
     $('.start-media').css('display', 'none');//сскрываем ролик
     $(".game").css("display", "flex");//подымаем экран игры - эффект
+    $('.game-field').css({
+        width: "800px",
+        height: "600px"
+    })
     $('.name-info').text(nameP);//отображаем
     //////////ункции игры
     pad();//управление
@@ -99,7 +105,7 @@ function pad() {
         if (e.keyCode == 38) {
             if (downPressed) {
                 downPressed = false;
-                $('.new-land').css('display', 'none')
+                $('.new-land').css('display', 'none');
                 return;
             }
             jumpPressed = true;
@@ -246,6 +252,7 @@ function draw() {
         player = $(".player");
 
     if (countHp <= 0) {
+        console.dir("1111");
         diePlayer();
         return;
     }
@@ -291,7 +298,7 @@ function draw() {
                         })
                     }
                 })
-            }
+            };
 
             if (moveHyena) {
                 player.animate({
@@ -342,7 +349,6 @@ function draw() {
                     }
                 })
             }
-
         }
     }
     jumpPlayer();
@@ -385,7 +391,6 @@ function collision(player, land) {
             continue;
         }
         let l = $("#land" + i);
-
 
         if (player.offset().left + player.width() >= l.offset().left && player.offset().left <= l.offset().left + l.width()) {
             move = true;
@@ -450,7 +455,7 @@ function randomInteger(min, max) {
 
 //движение фона влево
 function leftmoveBaseFrame(bool) {
-    if (bool) return
+    if (bool) return;
     $(".game-slider").animate({
         left: "+=" + speedMoveChar * 1.5 + "px"
     }, {
@@ -466,7 +471,7 @@ function leftmoveBaseFrame(bool) {
 
 //движение офона вправо
 function rightmoveBaseFrame(bool) {
-    if (bool) return
+    if (bool) return;
     $(".game-slider").animate({
         left: "-=" + speedMoveChar * 1.5 + "px"
     }, {
@@ -502,17 +507,19 @@ function digIn() {
         top: $('.player').position().top + 'px'
     })
 }
+
 //смерть игрока
 function diePlayer() {
     for (let i = 0; i < timer_game.length; i++) {
         clearInterval(timer_game[i]);
     }
-    $('.plr').attr('src', 'image/die.gif')
+    $('.plr').attr('src', 'image/die.gif');
     $(".player").animate({
         top: '-=540px'
     }, {
         duration: 2000,
         complete: function () {
+            returnGame = true;
             endGame();//конец игры при смерти
         }
     })
@@ -529,7 +536,7 @@ function generate_land() {
         baseImg = 500,
         baseWidth = 588,
         stepFrame = Math.round(baseFrame / baseWidth);
-    /////
+
     for (let i = 0; i < stepFrame; i++) {
         let bottom = baseBottom + randomInteger(baseBottom, baseBottom - 60),
             distance = randomInteger(40, 50),

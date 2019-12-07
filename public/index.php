@@ -83,17 +83,18 @@
         Пауза
     </div>
     <div class="table-finish-player">
-
         <div class="user">
             <table>
-                <tr>
-                    <td>Место</td>
-                    <td>Никнейм</td>
-                    <td>Очки</td>
-                </tr>
+<!--                <tr>-->
+<!--                    <td>Место</td>-->
+<!--                    <td>Никнейм</td>-->
+<!--                    <td>Очки</td>-->
+<!--                </tr>-->
             </table>
         </div>
-
+        <div class="new-game-btn">
+            Начать сначала
+        </div>
     </div>
     <div class="game-field">
         <div class="game-info">

@@ -6,7 +6,6 @@ const $anime_enter = () => {
     let si = setInterval(() => {
         if ($i >= $elem.length) {
             clearInterval(si);
-
         }
         let $e = $("." + $elem[$i]);
         switch ($e.data("anime")) {
@@ -57,7 +56,7 @@ $('.rules').click(() => {
 function anime_rules() {
     $('.rules-modal').css('display', 'flex');
     $('.modal').animate({
-        top: '+=115%'
+        top: '+=110%'
     }, {
         duration: time.modal
     });
@@ -65,7 +64,7 @@ function anime_rules() {
 
 $('.close').click(() => {
     $('.modal').animate({
-        top: '-=115%'
+        top: '-=110%'
     }, {
         duration: time.modal,//1000
         complete: function () {
@@ -132,6 +131,7 @@ $('.btn-enter').click(function () {
 
 //конец игры
 function finishGame() {
+
     pause = true;
     let time = $(".time-info").text().split(":");
     let point = Number(1000 - Number(time[0] * 60) + Number(time[1]) + Number(countCaterp) * 10);
@@ -160,12 +160,13 @@ function finishGame() {
                 success: function (data) {
                     console.dir(data);
                     let user = false;
+                    $('.user table').append("<tr><td> Место </td><td> Никнейм </td><td> Очки </td></tr>");
                     for (let i = 0; i < data["all10"].length; i++) {
                         let d1 = data["all10"][i];
 
-                        console.dir(d1["nickname"] != name);
+                        console.dir(d1["nickname"] != nameP);
 
-                        if (d1["nickname"] != name) {
+                        if (d1["nickname"] != nameP) {
                             $('.user table').append("<tr><td>" + d1["place"] + "</td><td>" + d1["nickname"] + "</td><td>" + d1["point"] + "</td></tr>");
                         } else {
                             if (i == 9 && !user) {
@@ -178,11 +179,38 @@ function finishGame() {
 
                     $(".table-finish-player").show();
                 }
-            })
-        }
-    })
+            });
 
+        }
+    });
 }
+$(".new-game-btn").on("click", function () {
+    console.dir("123");
+    $(".table-finish-player").hide();
+    $(".game").hide();
+    returnGame = true;
+    checkNewGame = true;
+    varNull();
+    $('.enter').animate({
+        top: '+=100%',
+        left: '-=90%',
+        width: '+=500px',
+        height: '+=600px',
+    }, {
+        duration: time.enter,
+        complete: function () {
+            checkNewGame = false;
+            $anime_enter();
+            $(".enter > div, .enter > label").show();
+            $(".character").show();
+            $(".start-game").hide();
+            $('.enter').css("display", "flex");
+            $('.pl-name-animate').val('');
+            $('.btn-enter').prop('disabled', true);
+            $('.user table').empty();
+        }
+    });
+})
 //смерть перса
 function endGame() {
     pause = true;
@@ -200,7 +228,7 @@ function endGame() {
             }, {
                 duration: 1000,
                 complete: function () {
-                    $(".return-game-btn").css("display","block");
+                    $(".return-game-btn").css("display", "block");
                 }
             })
         }
@@ -217,44 +245,43 @@ function endGame() {
                     height: '0'
                 }, {}).css({
                     display: 'none'
-                })
-            },
-            complete: function () {
+                });
                 varNull();
-                startGame();
             }
         })
     })
 }
 
-// //сброс настроек
-// function varNull() {
-//     console.log(returnGame);
-//     if (!returnGame) return;
-//     returnGame = false;
-//
-//     for (let i = 0; i < timer_game.length; i++) {
-//         clearInterval(timer_game[i]);
-//     }
-//     $('.new-land').css({display: 'none'});
-//     $('.game-slider').css('left', '');
-//     $('.hyena').empty();
-//     $('.caterpi').empty();
-//     $('.land').empty();
-//     moveInFrame = 400;
-//     paddleX = (moveInFrame - playerWidth) / 2;
-//     distanceCharY = 550;
-//     change = false;
-//     changeID = null;
-//     countHp = 100;
-//     countCaterp = 0;
-//     countTimes = 0;
-//     distationToFinish = 0;
-//     timer_game = [];
-//     cordHyena = 1;
-//     moveHyena = true;
-//     PlayerAnimate = false;
-//     pause = false;
-//     generate_land();
-//     drawAnime()
-// }
+//сброс настроек
+function varNull() {
+    console.log(returnGame);
+
+    if (!returnGame) return;
+    returnGame = false;
+    console.dir("СМЕЕЕРТЬ");
+
+    for (let i = 0; i < timer_game.length; i++) {
+        clearInterval(timer_game[i]);
+    }
+    $('.new-land').css({display: 'none'});
+    $('.game-slider').css('left', '');
+    $('.hyena').empty();
+    $('.caterpi').empty();
+    $('.land').empty();
+    moveInFrame = 400;
+    paddleX = (moveInFrame - playerWidth) / 2;
+    distanceCharY = 550;
+    change = false;
+    changeID = null;
+    countHp = 100;
+    countCaterp = 0;
+    countTimes = 0;
+    distationToFinish = 0;
+    timer_game = [];
+    cordHyena = 1;
+    moveHyena = true;
+    PlayerAnimate = false;
+    pause = false;
+    if (!checkNewGame) startGame();
+
+}
