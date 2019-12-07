@@ -134,7 +134,7 @@ function finishGame() {
 
     pause = true;
     let time = $(".time-info").text().split(":");
-    let point = Number(1000 - Number(time[0] * 60) + Number(time[1]) + Number(countCaterp) * 10);
+    let point = Math.floor(Number(1000 - Number(countTimes) + Number(countCaterp) * 10));
     console.dir(point);
     $('.game-field').animate({
         width: '0',

@@ -250,7 +250,22 @@ function draw() {
     let
         land = $('.land-frame'),
         player = $(".player");
+    $('.hp-info').text(Math.floor(countHp));
+    $('.caterp-info').text(countCaterp);
+    $('.time-info').text(
+        function () {
+            function num(val) {
+                val = Math.floor(val);
+                return val < 10 ? '0' + val : val;
+            };
+            var
+                sec = Math.floor(countTimes),
+                minutes = sec / 60 % 60,
+                seconds = sec % 60;
 
+            return num(minutes) + ":" + num(seconds);
+        }
+    );
     if (countHp <= 0) {
         console.dir("1111");
         diePlayer();
@@ -358,22 +373,7 @@ function draw() {
     });
 
     if (!downPressed) distationToFinish = 5505 + Math.floor($('.game-slider').position().left - $('.player').position().left);
-    $('.hp-info').text(Math.floor(countHp));
-    $('.caterp-info').text(countCaterp);
-    $('.time-info').text(
-        function () {
-            function num(val) {
-                val = Math.floor(val);
-                return val < 10 ? '0' + val : val;
-            };
-            var
-                sec = Math.floor(countTimes),
-                minutes = sec / 60 % 60,
-                seconds = sec % 60;
 
-            return num(minutes) + ":" + num(seconds);
-        }
-    );
 
     if ($('.game-slider').position().left <= -5260) {
         finishGame()
